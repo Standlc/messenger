@@ -1,0 +1,14 @@
+.chat-header-container {
+  padding: 10px 10px 10px 10px;
+}
+.chat-header-wrapper {
+  background-color: rgb(255, 255, 255);
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chat-header-username {
+  font-size: 18px;
+}

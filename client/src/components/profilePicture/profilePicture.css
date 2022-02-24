@@ -1,0 +1,40 @@
+.small {
+  height: 30px;
+  width: 30px;
+  margin-right: 15px;
+}
+.side-bar-conversation-item-PP.small {
+  font-size: 15px;
+}
+
+.medium {
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+}
+.side-bar-conversation-item-PP.medium {
+  font-size: 20px;
+}
+
+.large {
+  height: 50px;
+  width: 50px;
+  margin-right: 15px;
+}
+.side-bar-conversation-item-PP.large {
+  font-size: 28px;
+}
+
+.side-bar-conversation-item-PP {
+  height: 100%;
+  width: 100%;
+  border-radius: 50px;
+  display: block;
+}
+.side-bar-conversation-item-PP.initials {
+  background-color: rgb(223, 223, 223);
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

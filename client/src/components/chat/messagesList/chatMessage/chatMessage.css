@@ -1,0 +1,23 @@
+.conversation-message-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.conversation-message-wrapper.own {
+  align-items: flex-end;
+}
+.conversation-message {
+  margin: 1px 0;
+  padding: 8px 15px;
+  border-radius: 50px;
+  background-color: rgb(231, 231, 231);
+}
+.conversation-message.own {
+  background-color: var(--messages-own-bg-color);
+  color: white;
+}
+.conversation-message-date {
+  font-size: 13px;
+}

@@ -1,0 +1,13 @@
+.side-bar-conversation-item {
+  padding: 15px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.side-bar-conversation-item.current {
+  background-color: var(--messages-own-bg-color);
+  color: white;
+}

@@ -1,0 +1,24 @@
+.chat-input-wrapper {
+  padding: 20px;
+  display: flex;
+}
+.chat-input {
+  border: none;
+  border-radius: 50px;
+  padding: 8px 15px;
+  flex: 1;
+}
+.chat-input-send-button {
+  border: none;
+  padding: 8px 15px;
+  margin-left: 10px;
+  background-color: transparent;
+  color: black;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 300ms, color 300ms;
+}
+.chat-input-send-button.active {
+  background-color: var(--messages-own-bg-color);
+  color: white;
+}

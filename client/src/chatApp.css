@@ -1,0 +1,17 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+.chat-box {
+  flex: 6;
+  height: 100%;
+  background-color: rgb(247, 247, 248);
+  display: flex;
+  flex-direction: column;
+}
+
+:root {
+  --messages-padding: 8px 15px;
+  --messages-own-bg-color: rgb(99, 88, 255);
+}

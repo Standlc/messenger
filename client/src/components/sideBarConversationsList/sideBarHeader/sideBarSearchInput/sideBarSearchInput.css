@@ -1,0 +1,12 @@
+.side-bar-search-input-wrapper {
+  display: flex;
+  border-radius: 50px;
+  background-color: whitesmoke;
+}
+.side-bar-search-input {
+  border: none;
+  width: 100%;
+  padding: var(--messages-padding);
+  border-radius: 50px;
+  background-color: transparent;
+}
