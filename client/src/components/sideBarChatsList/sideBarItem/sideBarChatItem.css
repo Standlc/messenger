@@ -1,0 +1,19 @@
+.side-bar-chat-item {
+  padding: 15px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+.side-bar-chat-item-infos {
+  margin-left: 10px;
+}
+.side-bar-chat-item.current {
+  background-color: var(--messages-own-bg-color);
+  color: white;
+}
+.side-bar-chat-item-last-message {
+  font-size: 14px;
+  color: rgb(170, 170, 170);
+}

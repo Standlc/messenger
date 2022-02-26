@@ -1,9 +1,0 @@
-.conversation-message-list-container {
-  flex: 1;
-  padding: 20px 20px 0 20px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-}

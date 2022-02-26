@@ -7,7 +7,7 @@ const App = () => {
     <Router>
       <Routes>
         <Route path="/" element={<ChatApp />} />
-        <Route path="/:conversationId" element={<ChatApp />} />
+        <Route path="/:chatId" element={<ChatApp />} />
       </Routes>
     </Router>
   );

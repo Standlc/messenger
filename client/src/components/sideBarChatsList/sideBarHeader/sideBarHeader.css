@@ -1,0 +1,32 @@
+.side-bar-header-wrapper {
+  padding: 20px;
+}
+.side-bar-header-upper {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+.side-bar-header-left {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.side-bar-header-title {
+  font-size: 30px;
+  margin-left: 10px;
+}
+.side-bar-header-options-wrapper {
+  display: flex;
+  align-items: center;
+}
+.side-bar-header-option {
+  background-color: var(--messages-own-bg-color);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+}

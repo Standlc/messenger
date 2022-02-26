@@ -1,14 +1,16 @@
 import React from "react";
 import { Message } from "../../../ChatApp";
 import ChatMessage from "./chatMessage/ChatMessage";
-import "./messageConversationList.css";
+import "./messagesList.css";
 
 const MessagesList = ({ messages }: { messages: Message[] }) => {
   return (
-    <div className="conversation-message-list-container">
-      {messages.map((message, i) => (
-        <ChatMessage key={i} message={message} messages={messages} i={i} />
-      ))}
+    <div className="chat-messages-list-container">
+      <div className="chat-messages-list-wrapper">
+        {messages.map((message, i) => (
+          <ChatMessage key={message._id} messages={messages} i={i} />
+        ))}
+      </div>
     </div>
   );
 };

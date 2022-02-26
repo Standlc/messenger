@@ -1,8 +1,0 @@
-.side-bar-conversations-list-container {
-  flex: 3;
-}
-.side-bar-conversations-list-wrapper {
-  display: flex;
-  flex-direction: column;
-  padding: 0 10px;
-}

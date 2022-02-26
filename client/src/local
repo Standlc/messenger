@@ -1,0 +1,14 @@
+  // useEffect(() => {
+  //   localStorage.setItem(
+  //     "user",
+  //     JSON.stringify({
+  //       _id: "6216ade7d4ba9eda5415eb9c",
+  //       username: "second",
+  //       email: "secondEmail",
+  //       profilePicture: "",
+  //       createdAt: "2022-02-22T10:48:43.521+00:00",
+  //       updatedAt: "2022-02-22T10:48:43.521+00:00",
+  //       __v: 0,
+  //     })
+  //   );
+  // }, []);

@@ -1,5 +1,5 @@
-import moment from "moment";
 import { Message } from "../../../ChatApp";
+import { DateTime } from "luxon";
 
 export const hasCloseNeighbor = ({
   order,
@@ -10,66 +10,61 @@ export const hasCloseNeighbor = ({
   messages: Message[];
   i: number;
 }) => {
-  const neighborMessage = order === "next" ? messages[i + 1] : messages[i - 1];
-  const neighborMessageTime =
-    order === "next" ? neighborMessage?.createdAt : neighborMessage?.createdAt;
-  const currentMessageTime = messages[i].createdAt;
-  const isNeighborMessageOwn =
+  const neighborMessage = order === "next" ? messages[i - 1] : messages[i + 1];
+
+  const isNeighborOwnMessage =
     neighborMessage?.userInfos._id === messages[i]?.userInfos._id;
 
-  if (!neighborMessage || !neighborMessageTime || !isNeighborMessageOwn)
-    return false;
-  //   const dateTypes = ["year", "month", "day", "hour", "minute"];
+  if (!neighborMessage || !isNeighborOwnMessage) return false;
 
-  const time = (messageCreatedAt: Date, dateType: string) => {
+  const neighborMessageDate = neighborMessage?.createdAt;
+
+  const messageDate = messages[i].createdAt;
+
+  const time = (messageCreatedAt: string, dateType: string) => {
     const table = {
-      year: moment(messageCreatedAt).format().substring(0, 4),
-      month: moment(messageCreatedAt).format().substring(5, 7),
-      day: moment(messageCreatedAt).format().substring(8, 10),
-      hour: moment(messageCreatedAt).format().substring(11, 13),
-      minute: moment(messageCreatedAt).format().substring(14, 16),
+      year: DateTime.fromISO(messageCreatedAt).toLocaleString({
+        year: "2-digit",
+      }),
+      month: DateTime.fromISO(messageCreatedAt).toLocaleString({
+        month: "2-digit",
+      }),
+      day: DateTime.fromISO(messageCreatedAt).toLocaleString({
+        day: "2-digit",
+      }),
+      hour: DateTime.fromISO(messageCreatedAt).toLocaleString({
+        hour: "2-digit",
+        hourCycle: "h23",
+      }),
     };
     const isValidDateType =
       dateType === "year" ||
       dateType === "month" ||
       dateType === "day" ||
-      dateType === "hour" ||
-      dateType === "minute";
+      dateType === "hour";
 
     return table[isValidDateType ? dateType : "year"];
   };
 
   if (order === "next") {
-    if (time(currentMessageTime, "year") < time(neighborMessageTime, "year"))
-      return;
+    if (time(messageDate, "year") < time(neighborMessageDate, "year")) return;
 
-    if (time(currentMessageTime, "month") < time(neighborMessageTime, "month"))
-      return;
+    if (time(messageDate, "month") < time(neighborMessageDate, "month")) return;
 
-    if (time(currentMessageTime, "day") < time(neighborMessageTime, "day"))
-      return;
+    if (time(messageDate, "day") < time(neighborMessageDate, "day")) return;
 
-    if (time(currentMessageTime, "hour") < time(neighborMessageTime, "hour"))
-      return;
+    if (time(messageDate, "hour") < time(neighborMessageDate, "hour")) return;
 
-    return !(
-      time(currentMessageTime, "minute") < time(neighborMessageTime, "minute")
-    );
+    return !(time(messageDate, "minute") < time(neighborMessageDate, "minute"));
   } else {
-    if (time(currentMessageTime, "year") > time(neighborMessageTime, "year"))
-      return;
+    if (time(messageDate, "year") > time(neighborMessageDate, "year")) return;
 
-    if (time(currentMessageTime, "month") > time(neighborMessageTime, "month"))
-      return;
+    if (time(messageDate, "month") > time(neighborMessageDate, "month")) return;
 
-    if (time(currentMessageTime, "day") > time(neighborMessageTime, "day"))
-      return;
+    if (time(messageDate, "day") > time(neighborMessageDate, "day")) return;
 
-    if (time(currentMessageTime, "hour") > time(neighborMessageTime, "hour"))
-      return;
+    if (time(messageDate, "hour") > time(neighborMessageDate, "hour")) return;
 
-    return !(
-      time(currentMessageTime, "minute") > time(neighborMessageTime, "minute")
-    );
+    return !(time(messageDate, "minute") > time(neighborMessageDate, "minute"));
   }
 };

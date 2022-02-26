@@ -5,30 +5,31 @@ import "./profilePicture.css";
 const ProfilePicture = ({
   members,
   size,
+  absolute,
 }: {
   members: User[] | null | undefined;
-  size: string;
+  size?: string;
+  absolute?: boolean;
 }) => {
   const classNames = {
-    small: "side-bar-conversation-item-PP initials small",
-    medium: "side-bar-conversation-item-PP initials medium",
-    large: "side-bar-conversation-item-PP initials large",
+    small: "chat-PP initials small",
+    medium: "chat-PP initials medium",
+    large: "chat-PP initials large",
   };
   const sizeIsValid = size === "small" || size === "medium" || size === "large";
+  const className = () => {
+    return sizeIsValid ? classNames[size] : "";
+  };
 
   return (
-    <div>
+    <div className={absolute ? "chat-PP-wrapper-absolute" : "chat-wrapper-PP"}>
       {members?.map((member) => {
         return (
           <div key={member._id} className={size}>
             {member.profilePicture ? (
-              <img
-                alt=""
-                className="side-bar-conversation-item-PP"
-                src={member.profilePicture}
-              />
+              <img alt="" className="chat-PP" src={member.profilePicture} />
             ) : (
-              <div className={sizeIsValid ? classNames[size] : ""}>
+              <div className={className()}>
                 {member.username[0].toUpperCase()}
               </div>
             )}
