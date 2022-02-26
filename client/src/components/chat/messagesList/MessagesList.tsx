@@ -1,5 +1,5 @@
 import React from "react";
-import { Message } from "../../../ChatApp";
+import { Message } from "../../../types";
 import ChatMessage from "./chatMessage/ChatMessage";
 import "./messagesList.css";
 

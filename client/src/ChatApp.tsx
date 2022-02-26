@@ -8,30 +8,7 @@ import MessagesList from "./components/chat/messagesList/MessagesList";
 import ChatInput from "./components/chat/chatInput/ChatInput";
 import { useParams } from "react-router-dom";
 import ChatHeader from "./components/chat/chatHeader/ChatHeader";
-
-export type User = {
-  _id: string;
-  username: string;
-  email: string;
-  profilePicture: string;
-  createdAt: string;
-  updatedAt: string;
-};
-export type Message = {
-  _id: string;
-  content: string;
-  userInfos: User;
-  chatId: string;
-  createdAt: string;
-  updatedAt: string;
-};
-export interface Chat {
-  _id: string;
-  createdAt: string;
-  updatedAt: string;
-  membersInfos: User[];
-  lastMessage: Message | null;
-}
+import { Chat, Message, User } from "./types";
 
 const App = () => {
   const [user, setUser] = useState<User | null>(null);

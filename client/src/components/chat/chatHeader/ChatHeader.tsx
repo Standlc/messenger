@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { Chat } from "../../../ChatApp";
+import { Chat } from "../../../types";
 import ProfilePicture from "../../profilePicture/ProfilePicture";
 import "./chatHeader.css";
 

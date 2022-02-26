@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Chat } from "../../../ChatApp";
+import { Chat } from "../../../types";
 import { UserContext } from "../../../contexts/UserProvider";
 import ProfilePicture from "../../profilePicture/ProfilePicture";
 import "./sideBarChatItem.css";

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Chat } from "../../ChatApp";
+import { Chat } from "../../types";
 import { UserContext } from "../../contexts/UserProvider";
 import SideBarChatItem from "./sideBarItem/SideBarChatItem";
 import "./chatSideBar.css";

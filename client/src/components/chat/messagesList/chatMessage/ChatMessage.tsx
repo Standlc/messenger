@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { Message } from "../../../../ChatApp";
+import { Message } from "../../../../types";
 import { UserContext } from "../../../../contexts/UserProvider";
 import { hasCloseNeighbor } from "../isMessageClose";
 import "./chatMessage.css";

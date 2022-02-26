@@ -1,4 +1,4 @@
-import { Message } from "../../../ChatApp";
+import { Message } from "../../../types";
 import { DateTime } from "luxon";
 
 export const hasCloseNeighbor = ({

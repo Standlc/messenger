@@ -1,6 +1,6 @@
 import React from "react";
 import "./chatDate.css";
-import { Message } from "../../../../../ChatApp";
+import { Message } from "../../../../../types";
 import { DateTime } from "luxon";
 import { hasAboveNeighborOfSameTime } from "./hasAboveNeighbor";
 

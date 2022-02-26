@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { Message } from "../../../../../ChatApp";
+import { Message } from "../../../../../types";
 
 export const hasAboveNeighborOfSameTime = ({
   messages,

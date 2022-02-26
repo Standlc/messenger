@@ -1,5 +1,5 @@
 import React from "react";
-import { User } from "../ChatApp";
+import { User } from "../types";
 
 export interface UserContextType {
   user: User | null;
