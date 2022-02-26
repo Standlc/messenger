@@ -32,19 +32,25 @@ router.get("/:userId", async (req, res) => {
         const messages = await Message.find({
           chatId: chat._id,
         });
+        let chatCopy = {};
         const lastMessage = messages[messages.length - 1];
-        const lastMessageUser = await User.findById(lastMessage.userId);
-        const { password, ...othersLastMessageUser } = lastMessageUser._doc;
-        const { userId, ...othersLastMessage } = lastMessage._doc;
-        const lastMessageInfos = {
-          ...othersLastMessage,
-          userInfos: { ...othersLastMessageUser },
-        };
+        if (lastMessage) {
+          const lastMessageUser = await User.findById(lastMessage.userId);
+          const { password, ...othersLastMessageUser } = lastMessageUser._doc;
+          const { userId, ...othersLastMessage } = lastMessage._doc;
+          const lastMessageInfos = {
+            ...othersLastMessage,
+            userInfos: { ...othersLastMessageUser },
+          };
+          chatCopy = {
+            lastMessage: lastMessageInfos,
+          };
+        }
 
-        const chatCopy = {
+        chatCopy = {
+          ...chatCopy,
           ...others,
           membersInfos: [],
-          lastMessage: lastMessageInfos,
         };
 
         await Promise.all(
@@ -64,5 +70,7 @@ router.get("/:userId", async (req, res) => {
     res.status(500).json(error);
   }
 });
+
+//GET CHATS BY USERNAME
 
 module.exports = router;

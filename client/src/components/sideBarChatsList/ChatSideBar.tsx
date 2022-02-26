@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
-import { Chat } from "../../types";
-import { UserContext } from "../../contexts/UserProvider";
 import SideBarChatItem from "./sideBarItem/SideBarChatItem";
 import "./chatSideBar.css";
 import SideBarHeader from "./sideBarHeader/SideBarHeader";
+import { ChatsContext } from "../../contexts/ChatsProvider";
 
-const ChatSideBar = ({ chats }: { chats: Chat[] }) => {
-  const { user } = useContext(UserContext);
-
+const ChatSideBar = () => {
+  const { chats } = useContext(ChatsContext);
   return (
     <div className="chat-side-bar-container">
       <SideBarHeader />

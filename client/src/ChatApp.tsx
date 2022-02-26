@@ -9,6 +9,8 @@ import ChatInput from "./components/chat/chatInput/ChatInput";
 import { useParams } from "react-router-dom";
 import ChatHeader from "./components/chat/chatHeader/ChatHeader";
 import { Chat, Message, User } from "./types";
+import { ChatsContext } from "./contexts/ChatsProvider";
+import { sortedChatsByLastMessage } from "./sortChats";
 
 const App = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -53,9 +55,9 @@ const App = () => {
     setChats([...chatsCopy]);
   };
 
-  const sortMessages = (data: Message[]) => {
+  const sortMessages = (messages: Message[]) => {
     setMessages(
-      data.sort((m1: Message, m2: Message) => {
+      messages.sort((m1: Message, m2: Message) => {
         return (
           new Date(m2.createdAt).valueOf() - new Date(m1.createdAt).valueOf()
         );
@@ -69,7 +71,7 @@ const App = () => {
       const res = await axios.get(
         `http://localhost:5050/api/chats/${user?._id}`
       );
-      setChats(res.data);
+      setChats(sortedChatsByLastMessage({ chats: res.data }));
     };
     getChats();
   }, [user]);
@@ -119,18 +121,21 @@ const App = () => {
     updateCurrentChatLastMessage(messageCopy, currentChat, chatsCopy);
     setMessages([messageCopy, ...messages]);
     setMessageInput("");
+    setChats(sortedChatsByLastMessage({ chats: chatsCopy }));
   };
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
-      <div className="container">
-        <ChatSideBar chats={chats} />
-        <div className="chat-box">
-          <ChatHeader chats={chats} />
-          <MessagesList messages={messages} />
-          <ChatInput sendMessage={sendMessage} />
+      <ChatsContext.Provider value={{ chats, setChats }}>
+        <div className="container">
+          <ChatSideBar />
+          <div className="chat-box">
+            <ChatHeader />
+            <MessagesList messages={messages} />
+            <ChatInput sendMessage={sendMessage} />
+          </div>
         </div>
-      </div>
+      </ChatsContext.Provider>
     </UserContext.Provider>
   );
 };

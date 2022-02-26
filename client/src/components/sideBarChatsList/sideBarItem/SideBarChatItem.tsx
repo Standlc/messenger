@@ -1,18 +1,21 @@
-import React, { useContext } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Chat } from "../../../types";
-import { UserContext } from "../../../contexts/UserProvider";
 import ProfilePicture from "../../profilePicture/ProfilePicture";
 import "./sideBarChatItem.css";
 import { format } from "timeago.js";
 
 const SideBarConversationItem = ({ chat }: { chat: Chat }) => {
-  const { user } = useContext(UserContext);
-  const currentChatId = useParams().chatId;
-  const isCurrentChat = chat._id === currentChatId;
+  const currentChatParamsId = useParams().chatId;
+  const [isCurrentChat, setIsCurrentChat] = useState(
+    chat._id === currentChatParamsId
+  );
+  useEffect(() => {
+    setIsCurrentChat(chat._id === currentChatParamsId);
+  }, [currentChatParamsId]);
 
   return (
-    <Link className="Link" to={"/" + chat._id} style={{ marginBottom: "5px" }}>
+    <Link className="Link" to={"/" + chat._id} style={{ position: "relative" }}>
       <div
         className={
           isCurrentChat ? "side-bar-chat-item current" : "side-bar-chat-item"
@@ -29,12 +32,21 @@ const SideBarConversationItem = ({ chat }: { chat: Chat }) => {
               return member.username;
             })}
           </h1>
-          <p className="side-bar-chat-item-last-message">
-            {chat.lastMessage?.content} •{" "}
-            {chat.lastMessage && format(chat.lastMessage.createdAt)}
-          </p>
+
+          {chat.lastMessage?.content && (
+            <p className="side-bar-chat-item-last-message">
+              {chat.lastMessage.content.length > 20
+                ? chat.lastMessage.content.slice(0, 30) + "..."
+                : chat.lastMessage.content}
+              <span className="side-bar-chat-last-message-date">
+                {" "}
+                • {chat.lastMessage && format(chat.lastMessage.createdAt)}
+              </span>
+            </p>
+          )}
         </div>
       </div>
+      <div className="side-bar-chat-item-divider " />
     </Link>
   );
 };

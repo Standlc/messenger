@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import SideBarSearchInput from "./sideBarSearchInput/SideBarSearchInput";
 import "./sideBarHeader.css";
 import { Add } from "@mui/icons-material";
 import ProfilePicture from "../../profilePicture/ProfilePicture";
 import { UserContext } from "../../../contexts/UserProvider";
+import ChatSideBarSearchResults from "./chatSideBarSearchResults/ChatSideBarSearchResults";
 
 const SideBarHeader = () => {
   const userContext = useContext(UserContext);
+  const [searchInput, setSearchInput] = useState("");
+
   return (
     <div className="side-bar-header-wrapper">
       <div className="side-bar-header-upper">
@@ -25,7 +28,13 @@ const SideBarHeader = () => {
         </div>
       </div>
 
-      <SideBarSearchInput />
+      <SideBarSearchInput
+        searchInput={searchInput}
+        setSearchInput={setSearchInput}
+      />
+
+      <ChatSideBarSearchResults searchInput={searchInput} />
+      <div className="side-bar-header-divider" />
     </div>
   );
 };

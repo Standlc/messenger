@@ -1,19 +1,36 @@
 .side-bar-chat-item {
   padding: 15px;
-  background-color: whitesmoke;
   border-radius: 10px;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
+  overflow: hidden;
+  position: relative;
+}
+.side-bar-chat-item:hover {
+  background-color: whitesmoke;
+}
+.side-bar-chat-item-divider {
+  position: absolute;
+  bottom: 0;
+  background-color: rgb(218, 218, 218);
+  height: 1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 93%;
 }
 .side-bar-chat-item-infos {
   margin-left: 10px;
 }
 .side-bar-chat-item.current {
-  background-color: var(--messages-own-bg-color);
-  color: white;
+  background-color: rgb(241, 241, 241);
 }
 .side-bar-chat-item-last-message {
   font-size: 14px;
-  color: rgb(170, 170, 170);
+  word-break: normal;
+  color: gray;
+}
+.side-bar-chat-last-message-date {
+  text-transform: uppercase;
+  font-size: 11px;
 }

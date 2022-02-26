@@ -1,13 +1,21 @@
 .chat-input-wrapper {
   padding: 20px;
   display: flex;
+  align-items: flex-end;
 }
 .chat-input {
-  border: none;
-  border-radius: 50px;
+  border-radius: 15px;
   padding: 8px 15px;
   flex: 1;
-  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+  resize: none;
+  height: 0px;
+  display: flex;
+  align-items: center;
+  border: none;
+}
+.chat-input:focus {
+  outline: solid var(--chat-bg-main) 2px;
 }
 .chat-input-send-button {
   border: none;
@@ -20,6 +28,7 @@
   transition: background-color 300ms, color 300ms;
 }
 .chat-input-send-button.active {
-  background-color: var(--messages-own-bg-color);
+  background-color: var(--chat-bg-main);
   color: white;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
 }

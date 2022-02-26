@@ -4,7 +4,7 @@
   display: flex;
 }
 .chat-box {
-  flex: 6;
+  flex: 8;
   height: 100%;
   background-color: rgb(247, 247, 248);
   display: flex;
@@ -13,5 +13,5 @@
 
 :root {
   --messages-padding: 8px 15px;
-  --messages-own-bg-color: rgb(99, 88, 255);
+  --chat-bg-main: rgb(25, 141, 150);
 }

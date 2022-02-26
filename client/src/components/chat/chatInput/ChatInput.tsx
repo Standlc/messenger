@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./chatInput.css";
 
 const ChatInput = ({
@@ -14,14 +14,37 @@ const ChatInput = ({
 }) => {
   const [messageInput, setMessageInput] = useState<string>("");
 
+  const textAreaRef = useRef<HTMLTextAreaElement>(null);
+
+  const handleInput = (e: any) => {
+    setMessageInput(e.target.value);
+    autoGrow();
+  };
+
+  //AUTO GROW
+  const verticlePadding = 15;
+  const autoGrow = () => {
+    if (textAreaRef.current) {
+      textAreaRef.current.style.height = "0px";
+      textAreaRef.current.style.height = `${
+        textAreaRef.current.scrollHeight - verticlePadding
+      }px`;
+    }
+  };
+  useEffect(() => {
+    autoGrow();
+  }, [textAreaRef]);
+
   return (
     <div className="chat-input-wrapper">
-      <input
+      <textarea
+        ref={textAreaRef}
         className="chat-input"
         value={messageInput}
-        onChange={(e) => setMessageInput(e.target.value)}
+        onChange={handleInput}
         placeholder="Your message..."
-      ></input>
+      ></textarea>
+
       <button
         className={
           messageInput
