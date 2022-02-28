@@ -1,0 +1,18 @@
+.chat-header-PP-wrapper-skeleton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chat-header-PP-skeleton {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  background-color: rgb(241, 241, 241);
+  margin-right: 15px;
+}
+.chat-header-username-skeleton {
+  height: 20px;
+  width: 90px;
+  border-radius: 7px;
+  background-color: rgb(241, 241, 241);
+}

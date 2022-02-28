@@ -1,0 +1,23 @@
+.chat-message-wrapper-skeleton {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  margin-top: 2px;
+  width: 100%;
+}
+.chat-message-wrapper-skeleton.own {
+  justify-content: flex-end;
+}
+.chat-message-skeleton {
+  padding: 50px 0;
+  width: 50%;
+  background-color: rgb(240, 240, 240);
+  border-radius: 15px;
+}
+.chat-message-PP-skeleton {
+  height: 30px;
+  width: 30px;
+  background-color: rgb(240, 240, 240);
+  border-radius: 50%;
+  margin-right: 10px;
+}

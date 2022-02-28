@@ -3,7 +3,7 @@
   border-radius: 10px;
   display: flex;
   justify-content: flex-start;
-  align-items: flex-start;
+  align-items: center;
   overflow: hidden;
   position: relative;
 }
@@ -17,10 +17,10 @@
   height: 1px;
   left: 50%;
   transform: translateX(-50%);
-  width: 93%;
+  width: 90%;
 }
 .side-bar-chat-item-infos {
-  margin-left: 10px;
+  margin-left: 15px;
 }
 .side-bar-chat-item.current {
   background-color: rgb(241, 241, 241);
@@ -33,4 +33,22 @@
 .side-bar-chat-last-message-date {
   text-transform: uppercase;
   font-size: 11px;
+}
+
+.chat-side-bar-otpions-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 20px;
+  visibility: hidden;
+  cursor: pointer;
+  transform: translateX(20px);
+  opacity: 0;
+  transition: opacity 300ms, transform 300ms, visibility 300ms;
+}
+.side-bar-chat-item:hover .chat-side-bar-otpions-button {
+  visibility: visible;
+  transform: none;
+  opacity: 1;
 }

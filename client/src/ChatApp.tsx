@@ -10,7 +10,7 @@ import { useParams } from "react-router-dom";
 import ChatHeader from "./components/chat/chatHeader/ChatHeader";
 import { Chat, Message, User } from "./types";
 import { ChatsContext } from "./contexts/ChatsProvider";
-import { sortedChatsByLastMessage } from "./sortChats";
+import { sortedChatsByLastMessage } from "./sortedChats";
 
 const App = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -29,15 +29,25 @@ const App = () => {
   useEffect(() => {
     setSocket(io("http://localhost:8080"));
   }, []);
+
   useEffect(() => {
     socket?.emit("newUser", user?._id);
   }, [socket, user]);
+
   useEffect(() => {
-    socket?.on("newMessage", (message) => {
+    const handler = (message: any) => {
       setMessages((prev) => [message, ...prev]);
-      // setChats((prev) => [message, ...prev]);
-    });
-  }, [socket]);
+      const chatsCopy = [...chats];
+      const currentChat = chatsCopy.find(
+        (chat) => chat._id === currentChatParamsId
+      );
+      updateCurrentChatLastMessage(message, currentChat, chatsCopy);
+    };
+    socket?.on("newMessage", handler);
+    return () => {
+      socket?.off("newMessage", handler);
+    };
+  }, [socket, chats]);
 
   const emitNewMessageSocket = (message: Message, receiversIds: string[]) => {
     socket?.emit("newMessage", {
@@ -48,21 +58,12 @@ const App = () => {
 
   const updateCurrentChatLastMessage = (
     message: Message,
-    currentChat: Chat,
+    currentChat: Chat | undefined,
     chatsCopy: Chat[]
   ) => {
+    if (!currentChat) return;
     currentChat.lastMessage = message;
-    setChats([...chatsCopy]);
-  };
-
-  const sortMessages = (messages: Message[]) => {
-    setMessages(
-      messages.sort((m1: Message, m2: Message) => {
-        return (
-          new Date(m2.createdAt).valueOf() - new Date(m1.createdAt).valueOf()
-        );
-      })
-    );
+    setChats(sortedChatsByLastMessage({ chats: chatsCopy }));
   };
 
   //GET CHATS
@@ -75,18 +76,6 @@ const App = () => {
     };
     getChats();
   }, [user]);
-
-  //GET MESSAGES
-  useEffect(() => {
-    if (!currentChatParamsId) return;
-    const getMessages = async () => {
-      const res = await axios.get(
-        `http://localhost:5050/api/messages/${currentChatParamsId}`
-      );
-      sortMessages(res.data);
-    };
-    getMessages();
-  }, [currentChatParamsId]);
 
   //SEND MESSAGE
   const sendMessage = async ({
@@ -121,7 +110,6 @@ const App = () => {
     updateCurrentChatLastMessage(messageCopy, currentChat, chatsCopy);
     setMessages([messageCopy, ...messages]);
     setMessageInput("");
-    setChats(sortedChatsByLastMessage({ chats: chatsCopy }));
   };
 
   return (
@@ -131,7 +119,7 @@ const App = () => {
           <ChatSideBar />
           <div className="chat-box">
             <ChatHeader />
-            <MessagesList messages={messages} />
+            <MessagesList messages={messages} setMessages={setMessages} />
             <ChatInput sendMessage={sendMessage} />
           </div>
         </div>

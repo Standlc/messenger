@@ -19,5 +19,5 @@ export interface Chat {
   createdAt: string;
   updatedAt: string;
   membersInfos: User[];
-  lastMessage: Message | null;
+  lastMessage?: Message | null;
 }

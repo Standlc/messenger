@@ -1,7 +1,7 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Message } from "../../../../types";
 import { UserContext } from "../../../../contexts/UserProvider";
-import { hasCloseNeighbor } from "../isMessageClose";
+import { groupChatMessage, hasNeighborBelow } from "./groupeChatMessage";
 import "./chatMessage.css";
 import { scrollIntoView } from "./scrollIntoView";
 import ProfilePicture from "../../../profilePicture/ProfilePicture";
@@ -10,13 +10,13 @@ import { chatMessageDateFormat } from "./chatMessageDateFormat";
 
 const ChatMessage = ({ messages, i }: { messages: Message[]; i: number }) => {
   const { user } = useContext(UserContext);
-  const messageRef = useRef<HTMLDivElement>(null);
   const isOwnMessage = user?._id === messages[i].userInfos._id;
+  const messageRef = useRef<HTMLDivElement>(null);
 
+  //HOVER MESSAGE
   const [mouseOverTimeOut, setMouseOverTimeOut] = useState<NodeJS.Timeout>();
   const [isMouseHovering, setIsMouseHovering] = useState(false);
 
-  //HOVER MESSAGE
   const handleMouseHoveringMessage = () => {
     setMouseOverTimeOut(
       setTimeout(() => {
@@ -29,38 +29,18 @@ const ChatMessage = ({ messages, i }: { messages: Message[]; i: number }) => {
     setIsMouseHovering(false);
   };
 
-  const hasNeighborBelow = hasCloseNeighbor({
-    order: "next",
-    messages,
-    i,
-  });
-  const hasNeighborAbove = hasCloseNeighbor({
-    order: "prev",
-    messages,
-    i,
-  });
+  useEffect(() => {
+    groupChatMessage({ messages, i, messageRef, isOwnMessage });
+  }, [messages, i, messageRef, isOwnMessage]);
 
-  const chatMessageClassName = () => {
-    if (isOwnMessage) {
-      if (hasNeighborBelow && hasNeighborAbove)
-        return "chat-message own-up-down";
-      else if (hasNeighborBelow && !hasNeighborAbove)
-        return "chat-message own-down";
-      else if (!hasNeighborBelow && hasNeighborAbove)
-        return "chat-message own-up";
-      else return "chat-message own";
-    } else {
-      if (hasNeighborBelow && hasNeighborAbove) return "chat-message up-down";
-      else if (hasNeighborBelow && !hasNeighborAbove)
-        return "chat-message down";
-      else if (!hasNeighborBelow && hasNeighborAbove) return "chat-message up";
-      else return "chat-message";
-    }
-  };
+  useEffect(() => {
+    scrollIntoView({ messageRef, messages, i });
+  }, [messageRef, messages, i]);
 
-  // useEffect(() => {
-  //   scrollIntoView(messageRef);
-  // }, [messageRef]);
+  const hasMessageBelow = hasNeighborBelow({
+    message: messages[i],
+    messageBelow: messages[i - 1],
+  });
 
   return (
     <div
@@ -74,7 +54,7 @@ const ChatMessage = ({ messages, i }: { messages: Message[]; i: number }) => {
           isOwnMessage ? "chat-message-text-PP own" : "chat-message-text-PP"
         }
       >
-        {!hasNeighborBelow && !isOwnMessage && (
+        {!hasMessageBelow && !isOwnMessage && (
           <ProfilePicture
             members={[messages[i].userInfos]}
             size="small"
@@ -86,7 +66,7 @@ const ChatMessage = ({ messages, i }: { messages: Message[]; i: number }) => {
           onMouseEnter={handleMouseHoveringMessage}
           onMouseLeave={handleMouseLeaving}
           ref={messageRef}
-          className={chatMessageClassName()}
+          className={isOwnMessage ? "chat-message own" : "chat-message"}
         >
           {messages[i].content}
 

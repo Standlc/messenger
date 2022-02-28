@@ -41,39 +41,11 @@
   font-size: 13px;
   color: gray;
 }
-.chat-message-date-small.own {
-  left: -10px;
-  transform: translateX(-100%);
-}
-
-.chat-message.up {
-  border-top-left-radius: 5px;
-}
-.chat-message.down {
-  border-bottom-left-radius: 5px;
-}
-.chat-message.up-down {
-  border-bottom-left-radius: 5px;
-  border-top-left-radius: 5px;
-}
-
 .chat-message.own {
   background-color: var(--chat-bg-main);
   color: white;
 }
-.chat-message.own-up {
-  border-top-right-radius: 5px;
-  background-color: var(--chat-bg-main);
-  color: white;
-}
-.chat-message.own-down {
-  border-bottom-right-radius: 5px;
-  background-color: var(--chat-bg-main);
-  color: white;
-}
-.chat-message.own-up-down {
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
-  background-color: var(--chat-bg-main);
-  color: white;
+.chat-message-date-small.own {
+  left: -10px;
+  transform: translateX(-100%);
 }

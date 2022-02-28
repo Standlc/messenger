@@ -2,6 +2,12 @@ import React from "react";
 import { User } from "../../types";
 import "./profilePicture.css";
 
+const classNames = {
+  small: "chat-PP initials small",
+  medium: "chat-PP initials medium",
+  large: "chat-PP initials large",
+};
+
 const ProfilePicture = ({
   members,
   size,
@@ -11,11 +17,6 @@ const ProfilePicture = ({
   size?: string;
   absolute?: boolean;
 }) => {
-  const classNames = {
-    small: "chat-PP initials small",
-    medium: "chat-PP initials medium",
-    large: "chat-PP initials large",
-  };
   const sizeIsValid = size === "small" || size === "medium" || size === "large";
   const className = () => {
     return sizeIsValid ? classNames[size] : "";

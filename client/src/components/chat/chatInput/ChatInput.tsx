@@ -1,3 +1,4 @@
+import { Send } from "@mui/icons-material";
 import React, { useEffect, useRef, useState } from "react";
 import "./chatInput.css";
 
@@ -39,7 +40,7 @@ const ChatInput = ({
     <div className="chat-input-wrapper">
       <textarea
         ref={textAreaRef}
-        className="chat-input"
+        className={messageInput ? "chat-input active" : "chat-input"}
         value={messageInput}
         onChange={handleInput}
         placeholder="Your message..."
@@ -53,7 +54,7 @@ const ChatInput = ({
         }
         onClick={() => sendMessage({ messageInput, setMessageInput })}
       >
-        Send
+        <Send fontSize="large" />
       </button>
     </div>
   );
